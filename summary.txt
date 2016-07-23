@@ -1,0 +1,49 @@
+Vagrant
+Vagrant是虚拟机管理器,通过虚拟机提供的接口进行虚拟机管理,(例如管理VirtualBox)
+所以需要先现在VirtualBox 和 Vagrant
+
+Vagrant安装虚拟机流程
+从远程box仓库下载box文件到本地
+从本地box文件中抽取box安装虚拟机
+虚拟机环境是box的拷贝,删除了本地box文件或更新了本地box文件不会对虚拟机造成影响
+
+Vagrant 下载 box 地址
+https://atlas.hashicorp.com/boxes/search
+
+查看/更新/删除/本地box
+vagrant box list
+vagrant box update ...
+vagrant box remove ...
+
+基本命令
+vagrant up - 启动虚拟机，如果一个项目第一次执行，它会初始化一个虚拟机
+vagrant ssh - 连接虚拟机
+vagrant halt - 关闭虚拟机，普通的关机
+vagrant suspend - 暂停虚拟机,停止cpu使用,暂停后可以通过vagrant up还原
+vagrant reload - 重启虚拟机
+vagrant destroy - 删除虚拟机，虚拟机没了但是 box 还在
+
+添加box
+vagrant box add https://seven.centos.org/2016/07/updated-centos-vagrant-images-available-2/
+
+新建虚拟机
+mkdir ~/Centos && cd ~/Centos;
+vagrant init centos/7;
+vagrant up;
+
+打包当前虚拟机 && 把它加入到别人的box中 && 在别人的机器上复现这个虚拟机
+//自己机器
+cd Centos;
+vagrant package;
+cp pageckage.box ...
+//别人机器
+vagrant box add Tom pageckage.box
+mkdir ~/Tom && cd ~/Tom;
+vagrant init tom;
+vagrant up;
+
+
+参考:http://www.dreamxu.com/vagrant/
+
+
+
