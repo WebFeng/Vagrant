@@ -42,8 +42,39 @@ mkdir ~/Tom && cd ~/Tom;
 vagrant init tom;
 vagrant up;
 
+vagrant 有时启动卡在: SSH auth method: private key，重装下vagrant和virtualbox
+
+homestead的导出&在其它机器恢复
+导出:
+vagrant package;
+
+恢复:
+vagrant box add demo package.box
+mkdir server;cd server;
+git clone  https://github.com/laravel/homestead.git demo
+cd demo;
+git checkout v5.4.0
+vim Homstead.yml
+//指定新机器ip
+ip: "192.168.10.12"
+//指定name
+name: demo
+//指定host
+host: l.tytest.sina.cn
+//指定boxversion,否则vagrant up时,VagrantFile里的配置要求homestead版本>=2.0.0
+version: 0
+//指定刚才导出的box
+box: demo
+
 
 参考:http://www.dreamxu.com/vagrant/
+
+
+
+
+
+
+
 
 
 
